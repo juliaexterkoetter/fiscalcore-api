@@ -73,6 +73,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/health").permitAll()
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
                         .requestMatchers("/auth/register", "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/taxes/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/taxes/**").hasRole("ADMIN")
